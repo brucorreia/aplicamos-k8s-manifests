@@ -20,6 +20,8 @@ spec:
       containers:
         - name: aplicamos-crawl
           image: aplicamos.azurecr.io/aplicamos-crawl:$TAG_NAME
+          imagePullSecrets:
+          - name: aplicamos
           envFrom:
           - secretRef:
               name: aplicamos-crawl
