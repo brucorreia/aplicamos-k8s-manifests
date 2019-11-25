@@ -44,4 +44,4 @@ spec:
               port: 80
             initialDelaySeconds: 5
       imagePullSecrets:
-      - name: aplicamos
+      - name: registry 
