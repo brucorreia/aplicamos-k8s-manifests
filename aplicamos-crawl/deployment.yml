@@ -20,8 +20,6 @@ spec:
       containers:
         - name: aplicamos-crawl
           image: aplicamos.azurecr.io/aplicamos-crawl:$TAG_NAME
-        imagePullSecrets:
-        - name: aplicamos
           envFrom:
           - secretRef:
               name: aplicamos-crawl
@@ -45,3 +43,5 @@ spec:
               path: /healthcheck
               port: 80
             initialDelaySeconds: 5
+      imagePullSecrets:
+      - name: aplicamos
