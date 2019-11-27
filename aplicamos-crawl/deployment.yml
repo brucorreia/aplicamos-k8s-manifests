@@ -1,70 +1,47 @@
-apiVersion: apps/v1
+---
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/name: aplicamos-crawl
   name: aplicamos-crawl
+  namespace: aplicamos
 spec:
   progressDeadlineSeconds: 300
-  replicas: 1
-  revisionHistoryLimit: 10
-  selector: null
   strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 10%
     type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: aplicamos-crawl
     spec:
       containers:
-      - envFrom:
-        - secretRef:
-            name: aplicamos-crawl
-        image: aplicamos.azurecr.io/aplicamos-crawl:$TAG_NAME
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthcheck
-            port: 80
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        name: aplicamos-crawl
-        ports:
-        - containerPort: 80
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /healthcheck
-            port: 80
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: 128m
-            memory: 128M
-          requests:
-            cpu: 64m
-            memory: 64M
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
+        - name: aplicamos-crawl
+          image: aplicamos.azurecr.io/aplicamos-crawl:$TAG_NAME
+          envFrom:
+          - secretRef:
+              name: aplicamos-crawl
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources:
+            requests:
+              memory: "64M"
+              cpu: "64m"
+            limits:
+              memory: "128M"
+              cpu: "128m"
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 80
+            initialDelaySeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 80
+            initialDelaySeconds: 5
       imagePullSecrets:
       - name: registry
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-status: {}
