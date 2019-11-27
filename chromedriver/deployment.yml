@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: chromedriver
+  name: chromedriver
+spec:
+  template:
+    metadata:
+      labels:
+        app: chromedriver
+    spec:
+      containers:
+        - name: chromedriver
+          image: selenium/standalone-chrome 
+          ports:
+          - containerPort: 4444
+            protocol: TCP

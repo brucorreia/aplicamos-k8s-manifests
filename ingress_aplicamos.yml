@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: aplicamos-ingress
+  annotations:  
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts:
+    - aplicamos-crawl.aplicamos.com.br
+    secretName: letsencrypt-prod
+  rules:
+  - host: aplicamos-crawl.aplicamos.com.br
+    http:
+      paths:
+      - backend:
+          serviceName: aplicamos-crawl
+          servicePort: 80

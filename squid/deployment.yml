@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: squid
+  name: squid
+spec:
+  template:
+    metadata:
+      labels:
+        app: squid
+    spec:
+      containers:
+        - name: squid
+          image: sameersbn/squid
+          ports:
+          - containerPort: 3128
+            protocol: TCP

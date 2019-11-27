@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chromedriver
+  labels:
+    app: chromedriver
+spec:
+  ports:
+  - name: http
+    port: 4444
+    protocol: TCP
+  selector:
+    app: chromedriver
+
