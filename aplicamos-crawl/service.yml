@@ -3,7 +3,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: aplicamos-crawl
-  namespace: aplicamos
   labels:
     app: aplicamos-crawl
 spec:
