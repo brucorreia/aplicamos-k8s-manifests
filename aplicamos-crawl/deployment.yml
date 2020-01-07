@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: aplicamos-crawl
-          image: aplicamos.azurecr.io/aplicamos-crawl:$TAG_NAME
+          image: brucorreia/aplicamos-crawl:tagname:$TAG_NAME
           envFrom:
           - secretRef:
               name: aplicamos-crawl
