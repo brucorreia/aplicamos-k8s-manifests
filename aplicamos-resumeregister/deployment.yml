@@ -27,11 +27,11 @@ spec:
             protocol: TCP
           resources:
             requests:
+              memory: "32M"
+              cpu: "32m"
+            limits:
               memory: "64M"
               cpu: "64m"
-            limits:
-              memory: "128M"
-              cpu: "128m"
           livenessProbe:
             httpGet:
               path: /healthcheck
