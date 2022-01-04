@@ -12,5 +12,8 @@ spec:
           containers:
           - name: blacktrader-mm-rsi
             image: brucorreia/blacktrader-mm-rsi:$TAG_NAME
+            envFrom:
+            - secretRef:
+                name: blacktrader-mm-rsi
             imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
