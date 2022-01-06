@@ -17,3 +17,5 @@ spec:
                 name: blacktrader-mm-rsi
             imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
+      imagePullSecrets:
+      - name: registry

@@ -17,3 +17,5 @@ spec:
                 name: blacktrader-email-generate
             imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
+      imagePullSecrets:
+      - name: registry
