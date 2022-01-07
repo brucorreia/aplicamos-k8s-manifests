@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: blacktrader-mm-rsi
 spec:
-  schedule: "0 06 * * *"
+  schedule: "0 06 * * 1,2,3,4,5"
   jobTemplate:
     spec:
       template:

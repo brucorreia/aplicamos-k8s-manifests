@@ -4,7 +4,7 @@ kind: CronJob
 metadata:
   name: blacktrader-email-generate
 spec:
-  schedule: "0 12 * * *"
+  schedule: "0 12 * * 1,2,3,4,5"
   jobTemplate:
     spec:
       template:
