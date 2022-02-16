@@ -2,10 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app.kubernetes.io/name: aplicamos-startups
   name: aplicamos-startups
+  labels:
+    app: aplicamos-startups
 spec:
+  selector:
+    matchLabels:
+      app: aplicamos-startups
   progressDeadlineSeconds: 300
   strategy:
     type: RollingUpdate
@@ -17,30 +20,26 @@ spec:
         app: aplicamos-startups
     spec:
       containers:
-        - name: aplicamos-startups
-          image: brucorreia/aplicamos-startups:$TAG_NAME
-          envFrom:
-          - secretRef:
-              name: aplicamos-startups
-          ports:
-          - containerPort: 80
-            protocol: TCP
-          resources:
-            requests:
-              memory: "64M"
-              cpu: "64m"
-            limits:
-              memory: "128M"
-              cpu: "128m"
-          livenessProbe:
-            httpGet:
-              path: /healthcheck
-              port: 80
-            initialDelaySeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /healthcheck
-              port: 80
-            initialDelaySeconds: 5
+      - name: aplicamos-startups
+        image: brucorreia/aplicamos-startups:$TAG_NAME
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64M"
+            cpu: "64m"
+          limits:
+            memory: "128M"
+            cpu: "128m"
+        livenessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 80
+          initialDelaySeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /healthcheck
+            port: 80
+          initialDelaySeconds: 5
       imagePullSecrets:
       - name: registry
