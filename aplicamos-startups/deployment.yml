@@ -22,6 +22,9 @@ spec:
       containers:
       - name: aplicamos-startups
         image: brucorreia/aplicamos-startups:$TAG_NAME
+        envFrom:
+        - secretRef:
+            name: aplicamos-startups
         ports:
         - containerPort: 80
         resources:
